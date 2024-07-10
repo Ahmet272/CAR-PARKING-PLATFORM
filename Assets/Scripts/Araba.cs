@@ -52,5 +52,10 @@ public class Araba : MonoBehaviour
         {
             Destroy(gameObject);// obje havuzunda arabayý false yapacaðým
         }
+        else if (collision.gameObject.CompareTag("Elmas"))
+        {
+            collision.gameObject.SetActive(false);
+            _GameManager.ElmasSayisi++;
+        }
     }
 }

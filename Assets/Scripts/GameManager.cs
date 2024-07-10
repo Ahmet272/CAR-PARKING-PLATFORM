@@ -8,19 +8,23 @@ public class GameManager : MonoBehaviour
 {
     [Header("------ARABA AYARLARI")]
     public GameObject[] Arabalar;
-    public GameObject[] ArabaCanvasGorselleri;
-    public Sprite AracGeldiGorseli;
     public int KacArabaOlsun;
     int KalanAracSayisiDegeri;
     public GameObject DurusNoktasý;
     int AktifAracIndex = 0;
+ 
+    [Header("------CANVAS AYARLARI")]
+    public Sprite AracGeldiGorseli;
     public TextMeshProUGUI KalanAracSayisi;
-
+    public GameObject[] ArabaCanvasGorselleri;
 
 
     [Header("------PLATFORM AYARLARI")]
     public GameObject Platform_1;
     public GameObject Platform_2;
+
+    [Header("------LEVEL AYARLARI")]
+    public int ElmasSayisi;
 
     public float[] DonusHizlari;
     void Start()
