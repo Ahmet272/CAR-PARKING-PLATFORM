@@ -10,6 +10,7 @@ TagManager:
   - Araba
   - "DurusNoktas\u0131"
   - Elmas
+  - On_Parking
   layers:
   - Default
   - TransparentFX

@@ -29,35 +29,46 @@ public class Araba : MonoBehaviour
     }
       private void OnCollisionEnter(Collision collision)
       {
-        if (collision.gameObject.CompareTag("DurusNoktasý"))
-        {
-            DurusNoktasýDurumu = true;
-            _GameManager.DurusNoktasý.SetActive(false);
-        }
-       else if (collision.gameObject.CompareTag("Parking"))
+        
+       if (collision.gameObject.CompareTag("Parking"))
         {
             ilerle = false;
             Tekerizleri[0].SetActive(false);
             Tekerizleri[1].SetActive(false);
             transform.SetParent(parent);
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
             _GameManager.YeniArabaGetir();
         }
-        else if (collision.gameObject.CompareTag("OrtaGobek"))
-        {
-            Destroy(gameObject);// Canvas çýkacak // obje havuzunda arabayý false yapacaðým
-            _GameManager.Kaybettin();
-        }
+        
         else if (collision.gameObject.CompareTag("Araba"))
         {
             Destroy(gameObject);// obje havuzunda arabayý false yapacaðým
             _GameManager.Kaybettin();
         }
-        else if (collision.gameObject.CompareTag("Elmas"))
+        
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("DurusNoktasý"))
         {
-            collision.gameObject.SetActive(false);
+            DurusNoktasýDurumu = true;
+        }
+        else if (other.CompareTag("Elmas"))
+        {
+            other.gameObject.SetActive(false);
             _GameManager.ElmasSayisi++;
         }
+        else if (other.CompareTag("OrtaGobek"))
+        {
+            Destroy(gameObject);// Canvas çýkacak // obje havuzunda arabayý false yapacaðým
+            _GameManager.Kaybettin();
+        }
+        else if (other.CompareTag("On_Parking"))
+        {
+          //  other.gameObject.GetComponent<On_Parking>().ParkingAktiflestir();
+            other.gameObject.GetComponent<On_Parking>().parking.SetActive(true);
+        }
     }
+
 }

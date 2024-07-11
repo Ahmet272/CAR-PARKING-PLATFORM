@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public GameObject[] Arabalar;
     public int KacArabaOlsun;
     int KalanAracSayisiDegeri;
-    public GameObject DurusNoktasý;
     int AktifAracIndex = 0;
  
     [Header("------CANVAS AYARLARI")]
@@ -45,7 +44,6 @@ public class GameManager : MonoBehaviour
 
     public void YeniArabaGetir()
     {
-        DurusNoktasý.SetActive(true);
         KalanAracSayisiDegeri--;
         if (AktifAracIndex < KacArabaOlsun)
         {
@@ -79,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void Kaybettin()
     {
-        PlayerPrefs.SetInt("Elmas", PlayerPrefs.GetInt("Elmas") + ElmasSayisi);//KAybedince bile elmas kazanýr!!
+       // PlayerPrefs.SetInt("Elmas", PlayerPrefs.GetInt("Elmas") + ElmasSayisi);//KAybedince bile elmas kazanýr!!
 
         Textler[6].text = PlayerPrefs.GetInt("Elmas").ToString();
         Textler[7].text = SceneManager.GetActiveScene().name;
