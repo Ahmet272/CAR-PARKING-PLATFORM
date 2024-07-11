@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] ArabaCanvasGorselleri;
     public TextMeshProUGUI[] Textler;
     public GameObject[] Panellerim;
+    public GameObject[] TapToButonlar;
 
 
     [Header("------PLATFORM AYARLARI")]
@@ -45,12 +46,18 @@ public class GameManager : MonoBehaviour
     public void YeniArabaGetir()
     {
         DurusNoktasý.SetActive(true);
+        KalanAracSayisiDegeri--;
         if (AktifAracIndex < KacArabaOlsun)
         {
            
             Arabalar[AktifAracIndex].SetActive(true);
         }
-        KalanAracSayisiDegeri--;
+        else
+        {
+            Kazandýn();
+
+        }
+        
         /* ArabaCanvasGorselleri[AktifAracIndex -1].GetComponent<Image>().sprite = AracGeldiGorseli;
 
          KalanAracSayisi.text = KalanAracSayisiDegeri.ToString(); */
@@ -81,11 +88,29 @@ public class GameManager : MonoBehaviour
 
        
         Panellerim[1].SetActive(true);
+        Invoke("KaybettinButonuOrtayaCikart", 2f);
+    }
+    void KaybettinButonuOrtayaCikart()
+    {
+        TapToButonlar[0].SetActive(true);
+
+    }
+    void KazandýnButonuOrtayaCikart()
+    {
+        TapToButonlar[1].SetActive(true);
     }
 
     void Kazandýn()
     {
+        PlayerPrefs.SetInt("Elmas", PlayerPrefs.GetInt("Elmas") + ElmasSayisi);//KAybedince bile elmas kazanýr!!
+
+        Textler[2].text = PlayerPrefs.GetInt("Elmas").ToString();
+        Textler[3].text = SceneManager.GetActiveScene().name;
+        Textler[4].text = (KacArabaOlsun - KalanAracSayisiDegeri).ToString();
+        Textler[5].text = ElmasSayisi.ToString();
+
         Panellerim[2].SetActive(true);
+        Invoke("KazandýnButonuOrtayaCikart", 2f);
     }
 
 
@@ -96,6 +121,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Elmas"))
         {
             PlayerPrefs.SetInt("Elmas", 0);
+            PlayerPrefs.SetInt("Level", 1);
         }
 
         Textler[0].text = PlayerPrefs.GetInt("Elmas").ToString();
@@ -104,11 +130,20 @@ public class GameManager : MonoBehaviour
     }
     public  void izleVeDevamEt() 
     {
-        
+        // reklam iþleri
+    }
+    public void izleVeDahaFazlaKazan()
+    {
+        // reklam iþleri 
     }
     public void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void SonrakiLevel()
+    {
+        PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
 }
