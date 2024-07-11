@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Sprite AracGeldiGorseli;
     public TextMeshProUGUI KalanAracSayisi;
     public GameObject[] ArabaCanvasGorselleri;
+    public TextMeshProUGUI[] Textler;
+    public GameObject[] Panellerim;
 
 
     [Header("------PLATFORM AYARLARI")]
@@ -29,8 +32,9 @@ public class GameManager : MonoBehaviour
     public float[] DonusHizlari;
     void Start()
     {
-      /*  KalanAracSayisiDegeri = KacArabaOlsun;
-        KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
+        VarsayilanDegerleriKontrolEt();
+       KalanAracSayisiDegeri = KacArabaOlsun;
+       /* KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
          for (int i = 0; i < KacArabaOlsun; i++)
          {
             ArabaCanvasGorselleri[i].SetActive(true);
@@ -46,9 +50,10 @@ public class GameManager : MonoBehaviour
            
             Arabalar[AktifAracIndex].SetActive(true);
         }
-       /* ArabaCanvasGorselleri[AktifAracIndex -1].GetComponent<Image>().sprite = AracGeldiGorseli;
         KalanAracSayisiDegeri--;
-        KalanAracSayisi.text = KalanAracSayisiDegeri.ToString(); */
+        /* ArabaCanvasGorselleri[AktifAracIndex -1].GetComponent<Image>().sprite = AracGeldiGorseli;
+
+         KalanAracSayisi.text = KalanAracSayisiDegeri.ToString(); */
     }
     void Update()
     {
@@ -57,7 +62,53 @@ public class GameManager : MonoBehaviour
             Arabalar[AktifAracIndex].GetComponent<Araba>().ilerle = true;
             AktifAracIndex++;
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Panellerim[0].SetActive(false);
+        }
 
         Platform_1.transform.Rotate(new Vector3(0, 0, DonusHizlari[0]), Space.Self);
     }
+
+    public void Kaybettin()
+    {
+        PlayerPrefs.SetInt("Elmas", PlayerPrefs.GetInt("Elmas") + ElmasSayisi);//KAybedince bile elmas kazanýr!!
+
+        Textler[6].text = PlayerPrefs.GetInt("Elmas").ToString();
+        Textler[7].text = SceneManager.GetActiveScene().name;
+        Textler[8].text = (KacArabaOlsun - KalanAracSayisiDegeri).ToString();
+        Textler[9].text = ElmasSayisi.ToString();
+
+       
+        Panellerim[1].SetActive(true);
+    }
+
+    void Kazandýn()
+    {
+        Panellerim[2].SetActive(true);
+    }
+
+
+    // BELLEK YÖTENÝMÝ
+
+    void VarsayilanDegerleriKontrolEt()
+    {
+        if (!PlayerPrefs.HasKey("Elmas"))
+        {
+            PlayerPrefs.SetInt("Elmas", 0);
+        }
+
+        Textler[0].text = PlayerPrefs.GetInt("Elmas").ToString();
+        Textler[1].text = SceneManager.GetActiveScene().name;
+
+    }
+    public  void izleVeDevamEt() 
+    {
+        
+    }
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
