@@ -38,12 +38,12 @@ public class GameManager : MonoBehaviour
         DonusVarmi = true;
         VarsayilanDegerleriKontrolEt();
        KalanAracSayisiDegeri = KacArabaOlsun;
-       /* KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
+       // KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
          for (int i = 0; i < KacArabaOlsun; i++)
          {
             ArabaCanvasGorselleri[i].SetActive(true);
          }
-       */
+       
     }
 
     public void YeniArabaGetir()
@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
 
         }
         
-        /* ArabaCanvasGorselleri[AktifAracIndex -1].GetComponent<Image>().sprite = AracGeldiGorseli;
+        ArabaCanvasGorselleri[AktifAracIndex -1].GetComponent<Image>().sprite = AracGeldiGorseli;
 
-         KalanAracSayisi.text = KalanAracSayisiDegeri.ToString(); */
+        // KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
     }
     void Update()
     {
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Panellerim[0].SetActive(false);
+            Panellerim[3].SetActive(true);
         }
         if (DonusVarmi)
         Platform_1.transform.Rotate(new Vector3(0, 0, DonusHizlari[0]), Space.Self);
@@ -90,9 +91,8 @@ public class GameManager : MonoBehaviour
         Textler[9].text = ElmasSayisi.ToString();
         Sesler[1].Play();
         Sesler[3].Play();
-
-
         Panellerim[1].SetActive(true);
+        Panellerim[3].SetActive(false);
         Invoke("KaybettinButonuOrtayaCikart", 2f);
     }
     void KaybettinButonuOrtayaCikart()
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         Textler[4].text = (KacArabaOlsun - KalanAracSayisiDegeri).ToString();
         Textler[5].text = ElmasSayisi.ToString();
         Sesler[2].Play();
+        Panellerim[3].SetActive(false);
         Panellerim[2].SetActive(true);
         Invoke("KazandýnButonuOrtayaCikart", 2f);
     }
