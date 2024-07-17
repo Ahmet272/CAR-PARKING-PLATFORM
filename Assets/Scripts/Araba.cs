@@ -51,7 +51,7 @@ public class Araba : MonoBehaviour
     }
     void ArabaTeknik›slemi()
     {
-        ilerle = false;
+      //  ilerle = false;
         Tekerizleri[0].SetActive(false);
         Tekerizleri[1].SetActive(false);
     }
