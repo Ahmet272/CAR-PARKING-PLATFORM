@@ -78,8 +78,8 @@ public class Araba : MonoBehaviour
         }
         else if (other.CompareTag("On_Parking"))
         {
-          //  other.gameObject.GetComponent<On_Parking>().ParkingAktiflestir();
-            other.gameObject.GetComponent<On_Parking>().parking.SetActive(true);
+           other.gameObject.GetComponent<On_Parking>().ParkingAktiflestir();
+           // other.gameObject.GetComponent<On_Parking>().parking.SetActive(true);
         }
     }
 
