@@ -25,13 +25,16 @@ public class GameManager : MonoBehaviour
     [Header("------PLATFORM AYARLARI")]
     public GameObject Platform_1;
     public GameObject Platform_2;
+    bool DonusVarmi;
 
     [Header("------LEVEL AYARLARI")]
     public int ElmasSayisi;
+    public ParticleSystem CarpmaEfekti;
 
     public float[] DonusHizlari;
     void Start()
     {
+        DonusVarmi = true;
         VarsayilanDegerleriKontrolEt();
        KalanAracSayisiDegeri = KacArabaOlsun;
        /* KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
@@ -71,12 +74,13 @@ public class GameManager : MonoBehaviour
         {
             Panellerim[0].SetActive(false);
         }
-
+        if (DonusVarmi)
         Platform_1.transform.Rotate(new Vector3(0, 0, DonusHizlari[0]), Space.Self);
     }
 
     public void Kaybettin()
     {
+        DonusVarmi = false;
        // PlayerPrefs.SetInt("Elmas", PlayerPrefs.GetInt("Elmas") + ElmasSayisi);//KAybedince bile elmas kazanýr!!
 
         Textler[6].text = PlayerPrefs.GetInt("Elmas").ToString();

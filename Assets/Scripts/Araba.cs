@@ -11,6 +11,7 @@ public class Araba : MonoBehaviour
     public GameObject[] Tekerizleri;
     public Transform parent;
     public GameManager _GameManager;
+    public GameObject ParcPoint;
     void Start()
     {
         
@@ -32,21 +33,28 @@ public class Araba : MonoBehaviour
         
        if (collision.gameObject.CompareTag("Parking"))
         {
-            ilerle = false;
-            Tekerizleri[0].SetActive(false);
-            Tekerizleri[1].SetActive(false);
+            ArabaTeknikÝslemi();
             transform.SetParent(parent);
             _GameManager.YeniArabaGetir();
         }
         
         else if (collision.gameObject.CompareTag("Araba"))
         {
+            _GameManager.CarpmaEfekti.transform.position = ParcPoint.transform.position;
+            _GameManager.CarpmaEfekti.Play();
+            ArabaTeknikÝslemi();
+
             Destroy(gameObject);// obje havuzunda arabayý false yapacaðým
             _GameManager.Kaybettin();
         }
         
     }
-
+    void ArabaTeknikÝslemi()
+    {
+        ilerle = false;
+        Tekerizleri[0].SetActive(false);
+        Tekerizleri[1].SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -61,7 +69,10 @@ public class Araba : MonoBehaviour
         }
         else if (other.CompareTag("OrtaGobek"))
         {
-            Destroy(gameObject);// Canvas çýkacak // obje havuzunda arabayý false yapacaðým
+            _GameManager.CarpmaEfekti.transform.position = ParcPoint.transform.position;
+            _GameManager.CarpmaEfekti.Play();
+            ArabaTeknikÝslemi();
+
             _GameManager.Kaybettin();
         }
         else if (other.CompareTag("On_Parking"))
