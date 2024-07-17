@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     [Header("------LEVEL AYARLARI")]
     public int ElmasSayisi;
     public ParticleSystem CarpmaEfekti;
+    public AudioSource[] Sesler;
 
     public float[] DonusHizlari;
     void Start()
@@ -87,8 +88,10 @@ public class GameManager : MonoBehaviour
         Textler[7].text = SceneManager.GetActiveScene().name;
         Textler[8].text = (KacArabaOlsun - KalanAracSayisiDegeri).ToString();
         Textler[9].text = ElmasSayisi.ToString();
+        Sesler[1].Play();
+        Sesler[3].Play();
 
-       
+
         Panellerim[1].SetActive(true);
         Invoke("KaybettinButonuOrtayaCikart", 2f);
     }
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
         Textler[3].text = SceneManager.GetActiveScene().name;
         Textler[4].text = (KacArabaOlsun - KalanAracSayisiDegeri).ToString();
         Textler[5].text = ElmasSayisi.ToString();
-
+        Sesler[2].Play();
         Panellerim[2].SetActive(true);
         Invoke("KazandýnButonuOrtayaCikart", 2f);
     }
