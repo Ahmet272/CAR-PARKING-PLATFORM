@@ -7,8 +7,8 @@ public class On_Parking : MonoBehaviour
     public GameObject parking;
     
 
-    public void ParkingAktiflestir()
+   /* public void ParkingAktiflestir()
     {
         parking.SetActive(true);
-    }
+    } */
 }
